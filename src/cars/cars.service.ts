@@ -1,25 +1,28 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { v4 as uuid } from 'uuid';
+import { Car } from './car.interface';
+import { CreateCarDto } from './dto/create-car.dto';
 
 @Injectable()
 export class CarsService {
-  private cars = [
-    { id: 1, brand: 'Toyota', model: 'Corolla' },
-    { id: 2, brand: 'BMW', model: 'X5' },
-    { id: 3, brand: 'Ford', model: 'Mustang' },
-    { id: 4, brand: 'Honda', model: 'Civic' },
-    { id: 5, brand: 'Chevrolet', model: 'Camaro' },
-    { id: 6, brand: 'Tesla', model: 'Model S' },
-    { id: 7, brand: 'Audi', model: 'A4' },
-    { id: 8, brand: 'Mercedes', model: 'C-Class' },
-    { id: 9, brand: 'Volkswagen', model: 'Golf' },
-    { id: 10, brand: 'Nissan', model: 'Altima' },
+  private cars: Car[] = [
+    { id: uuid(), brand: 'Toyota', model: 'Corolla' },
+    { id: uuid(), brand: 'BMW', model: 'X5' },
+    { id: uuid(), brand: 'Ford', model: 'Mustang' },
+    { id: uuid(), brand: 'Honda', model: 'Civic' },
+    { id: uuid(), brand: 'Chevrolet', model: 'Camaro' },
+    { id: uuid(), brand: 'Tesla', model: 'Model S' },
+    { id: uuid(), brand: 'Audi', model: 'A4' },
+    { id: uuid(), brand: 'Mercedes', model: 'C-Class' },
+    { id: uuid(), brand: 'Volkswagen', model: 'Golf' },
+    { id: uuid(), brand: 'Nissan', model: 'Altima' },
   ];
 
   findAll() {
     return this.cars;
   }
 
-  findOneById(id: number) {
+  findOneById(id: string) {
     const car = this.cars.find((car) => car.id === id);
     if (!car) {
       throw new NotFoundException(`Car with id ${id} not found`);
@@ -28,12 +31,12 @@ export class CarsService {
     }
   }
 
-  addCar(car: { id: number; brand: string; model: string }) {
-    this.cars.push(car);
+  addCar(car: CreateCarDto) {
+    this.cars.push({ id: uuid(), ...car });
     return car;
   }
 
-  updateCar(id: number, car: { brand: string; model: string }) {
+  updateCar(id: string, car: { brand: string; model: string }) {
     const carFinded = this.findOneById(id);
     if (carFinded) {
       carFinded.brand = car.brand;
@@ -44,7 +47,7 @@ export class CarsService {
     }
   }
 
-  deleteCar(id: number) {
+  deleteCar(id: string) {
     const carIndex = this.cars.findIndex((car) => car.id === id);
     if (carIndex === -1) {
       throw new NotFoundException(`Car with id ${id} not found`);
