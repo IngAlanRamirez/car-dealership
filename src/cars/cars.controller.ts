@@ -4,35 +4,35 @@ import { CarsService } from './cars.service';
 @Controller('cars')
 export class CarsController {
 
-  constructor(private readonly carsService: CarsService) { }
+    constructor(private readonly carsService: CarsService) { }
 
-  @Get()
-  getAllCars() {
-    return this.carsService.findAll();
-  }
+    @Get()
+    getAllCars() {
+        return this.carsService.findAll();
+    }
 
-  @Get(':id')
-  getCarById(@Param('id', ParseIntPipe) id: number) {
-    return this.carsService.findOneByID(id);
-  }
+    @Get(':id')
+    getCarById(@Param('id') id: string) {
+        return this.carsService.findOneByID(id);
+    }
 
-  @Post()
-  createCar(@Body() payload: any) {
-    return payload;
-  }
+    @Post()
+    createCar(@Body() payload: any) {
+        return payload;
+    }
 
-  @Patch(':id')
-  updateCar(@Param('id', ParseIntPipe) id: number, @Body() payload: any) {
-    return {
-      id,
-      ...payload
-    };
-  }
+    @Patch(':id')
+    updateCar(@Param('id') id: string, @Body() payload: any) {
+        return {
+            id,
+            ...payload
+        };
+    }
 
-  @Delete(':id')
-  deleteCar(@Param('id', ParseIntPipe) id: number) {
-    return {
-      message: `Car with id ${id} deleted`
-    };
-  }
+    @Delete(':id')
+    deleteCar(@Param('id') id: string) {
+        return {
+            message: `Car with id ${id} deleted`
+        };
+    }
 }
