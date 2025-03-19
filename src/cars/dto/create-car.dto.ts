@@ -5,5 +5,6 @@ export class CreateCarDto {
     readonly brand: string;
     @IsString()
     readonly model: string;
+    @IsString()
     readonly year: number;
 }
