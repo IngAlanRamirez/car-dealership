@@ -53,4 +53,13 @@ export class CarsService {
         this.cars.push(newCar);
         return newCar;
     }
+
+    update(id: string, updateCarDto: CreateCarDto) {
+        const car = this.findOneByID(id);
+        if (!car) {
+            throw new NotFoundException(`Car with id ${id} not found`);
+        }
+        Object.assign(car, updateCarDto);
+        return car;
+    }
 }
