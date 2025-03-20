@@ -5,32 +5,7 @@ import { CreateCarDto } from './dto/create-car.dto';
 
 @Injectable()
 export class CarsService {
-    private cars: Car[] = [
-        {
-            id: uuid(),
-            brand: 'Toyota',
-            model: 'Corolla',
-            year: 2019
-        },
-        {
-            id: uuid(),
-            brand: 'Honda',
-            model: 'Civic',
-            year: 2018
-        },
-        {
-            id: uuid(),
-            brand: 'Ford',
-            model: 'Fusion',
-            year: 2017
-        },
-        {
-            id: uuid(),
-            brand: 'Chevrolet',
-            model: 'Cruze',
-            year: 2016
-        }
-    ];
+    private cars: Car[] = [];
 
     findAll() {
         return this.cars;
@@ -69,5 +44,9 @@ export class CarsService {
         return {
             message: `Car with id ${id} deleted`
         };
+    }
+
+    fillCars(cars: Car[]) {
+        this.cars = cars;
     }
 }

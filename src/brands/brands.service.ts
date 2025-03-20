@@ -7,20 +7,7 @@ import { Brand } from './entities/brand.entity';
 @Injectable()
 export class BrandsService {
 
-    private brands: Brand[] = [
-        {
-            id: uuid(),
-            name: 'Mercedes Benz',
-            createdAt: Date.now(),
-            updatedAt: Date.now()
-        },
-        {
-            id: uuid(),
-            name: 'Ferrari',
-            createdAt: Date.now(),
-            updatedAt: Date.now()
-        }
-    ]
+    private brands: Brand[] = [];
 
     create(createBrandDto: CreateBrandDto) {
         const newBrand: Brand = {
@@ -62,5 +49,9 @@ export class BrandsService {
             throw new NotFoundException(`Brand with id ${id} not found`);
         }
         this.brands = this.brands.filter(brand => brand.id !== id);
+    }
+
+    fillBrands(brands: Brand[]) {
+        this.brands = brands;
     }
 }
