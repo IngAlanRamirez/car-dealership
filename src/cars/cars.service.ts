@@ -56,10 +56,18 @@ export class CarsService {
 
     update(id: string, updateCarDto: CreateCarDto) {
         const car = this.findOneByID(id);
-        if (!car) {
-            throw new NotFoundException(`Car with id ${id} not found`);
-        }
         Object.assign(car, updateCarDto);
         return car;
+    }
+
+    delete(id: string) {
+        const carIndex = this.cars.findIndex(car => car.id === id);
+        if (carIndex === -1) {
+            throw new NotFoundException(`Car with id ${id} not found`);
+        }
+        this.cars.splice(carIndex, 1);
+        return {
+            message: `Car with id ${id} deleted`
+        };
     }
 }
