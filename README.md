@@ -57,6 +57,12 @@ $ pnpm run test:e2e
 $ pnpm run test:cov
 ```
 
+# Car DealerShip
+Populate DB
+```
+http://localhost:3000/seed
+```
+
 ## Deployment
 
 When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
